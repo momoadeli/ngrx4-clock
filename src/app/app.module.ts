@@ -5,7 +5,7 @@ import { appRoutes } from './app.routes';
 
 import { AppComponent } from './app.component';
 import { ClockComponent } from './clock/container/clock.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './page-not-found/container/page-not-found.component';
 
 @NgModule({
   declarations: [
