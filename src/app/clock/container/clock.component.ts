@@ -5,7 +5,7 @@ import { ClockService } from '../clock.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import * as fromClockColor from '../state-management/reducers/clock-color';
-
+import * as clockColorActions from '../state-management/actions/clock-color';
 interface AppState {
   clock_color: string;
 }
@@ -29,10 +29,11 @@ export class ClockComponent implements OnInit, OnDestroy {
     private store: Store<AppState>
   ) {
     this._clock_color$ = store.select('clock_color');
-    this._clockColorStoreSubscription = this._clock_color$.subscribe( (clock_color) => {
-      console.log('in store subscribe' + clock_color);
-      this._clock_color = clock_color;
-    });
+    this._clockColorStoreSubscription =
+      this._clock_color$.subscribe( (clock_color) => {
+        console.log('in store subscribe' + clock_color);
+        this._clock_color = clock_color;
+      });
   }
 
   ngOnInit() {
@@ -40,20 +41,26 @@ export class ClockComponent implements OnInit, OnDestroy {
       // this._clock_color = params['clock-color'];
 
       // In a real app: dispatch action to load the details here:
-      if (params['clock-color']) {
-        this.store.dispatch({ type: params['clock-color'] });
-      }
-      else {
-        this.store.dispatch({ type: '' });
+      // if (params['clock-color']) {
+      //   this.store.dispatch({ type: params['clock-color'] });
+      // } else {
+      //   this.store.dispatch({ type: '' });
+      // }
+      if (params['clock-color'] === 'blue') {
+        this.store.dispatch(new clockColorActions.SetBlue());
+      } else if (params['clock-color'] === 'red') {
+        this.store.dispatch(new clockColorActions.SetRed());
+      } else {
+        this.store.dispatch(new clockColorActions.SetRed());
       }
     });
 
     this._clockServiceSubscription = this.clockService.getTimer().subscribe(
       (timer) => {
         this._clockDate = new Date();
-        console.log('timer invoked: ' + this._clockDate)
+        console.log('timer invoked: ' + this._clockDate);
       }, (error) => {
-        console.log('timer error')
+        console.log('timer error');
       }, () => {
         console.log('timer is never done');
       });

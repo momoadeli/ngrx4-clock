@@ -1,16 +1,22 @@
 // clock-color.ts
-import { Action } from '@ngrx/store';
+import * as clockColorActions from '../actions/clock-color';
 
-export const SET_RED = 'red';
-export const SET_BLUE = 'blue';
+export interface State {
+    clock_color: string;
+}
 
-export function clockColorReducer(state: string, action: Action) {
+const initialState: State = {
+    clock_color: '',
+};
+
+export function clockColorReducer(state: State = initialState,
+                                action: clockColorActions.Actions): State {
     switch (action.type) {
-        case SET_RED:
-            return state = 'red';
-        case SET_BLUE:
-            return state = 'blue';
+        case clockColorActions.SET_RED:
+            return { clock_color: 'red' };
+        case clockColorActions.SET_BLUE:
+            return { clock_color: 'blue' };
         default:
-            return state = '';
+            return state;
     }
 }

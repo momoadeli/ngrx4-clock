@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 export class ClockService {
   private _timer: Observable<number>;
 
-  constructor() { 
+  constructor() {
     this.startTimer();
   }
 

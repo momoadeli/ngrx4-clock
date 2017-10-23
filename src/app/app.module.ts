@@ -23,7 +23,7 @@ import * as fromClockColor from './clock/state-management/reducers/clock-color';
     RouterModule.forRoot(
       appRoutes
     ),
-    StoreModule.forRoot({ clock_color: fromClockColor.clockColorReducer })
+    StoreModule.forRoot({ reducers: fromClockColor.clockColorReducer })
   ],
   providers: [
     ClockService,
