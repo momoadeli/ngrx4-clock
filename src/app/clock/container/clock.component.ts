@@ -10,8 +10,9 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ClockComponent implements OnInit, OnDestroy {
 
-  private clock_color = 'Red';
+  private _clock_color = 'Red';
   private _subscription: Subscription;
+  private _clockDate: Date;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,16 +21,17 @@ export class ClockComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.clock_color = params['clock-color'];
+      this._clock_color = params['clock-color'];
 
       // In a real app: dispatch action to load the details here.
     });
 
     this._subscription = this.clockService.getTimer().subscribe( 
       (timer) => {
-      console.log('timer invoked: ' + timer)
+        this._clockDate = new Date();
+        console.log('timer invoked: ' + this._clockDate)
       }, (error) => {
-      console.log('timer error')
+        console.log('timer error')
       }, () => {
         console.log('timer is never done');
       });

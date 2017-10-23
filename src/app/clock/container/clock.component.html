@@ -1,5 +1,6 @@
 <div class="clock-container">
-  <div class="clock-item" [style.background]="clock_color">
-    {{clock_color}} clock works!
-  </div>
+  <app-clock-widget 
+    [clockColor]="_clock_color"
+    [clock]="_clockDate">
+  </app-clock-widget>
 </div>
