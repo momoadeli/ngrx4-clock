@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { ClockService } from '../clock.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
-import * as clockColorReducers from '../state-management/reducers/clock-color';
+import * as fromClockColor from '../state-management/reducers/clock-color';
 
 interface AppState {
   clock_color: string;
@@ -19,7 +19,8 @@ export class ClockComponent implements OnInit, OnDestroy {
 
   private _clock_color;
   private _clock_color$: Observable<string>;
-  private _subscription: Subscription;
+  private _clockServiceSubscription: Subscription;
+  private _clockColorStoreSubscription: Subscription;
   private _clockDate: Date;
 
   constructor(
@@ -28,7 +29,7 @@ export class ClockComponent implements OnInit, OnDestroy {
     private store: Store<AppState>
   ) {
     this._clock_color$ = store.select('clock_color');
-    this._clock_color$.subscribe( (clock_color) => {
+    this._clockColorStoreSubscription = this._clock_color$.subscribe( (clock_color) => {
       console.log('in store subscribe' + clock_color);
       this._clock_color = clock_color;
     });
@@ -39,10 +40,15 @@ export class ClockComponent implements OnInit, OnDestroy {
       // this._clock_color = params['clock-color'];
 
       // In a real app: dispatch action to load the details here:
-      this.store.dispatch({ type: params['clock-color'] });
+      if (params['clock-color']) {
+        this.store.dispatch({ type: params['clock-color'] });
+      }
+      else {
+        this.store.dispatch({ type: '' });
+      }
     });
 
-    this._subscription = this.clockService.getTimer().subscribe(
+    this._clockServiceSubscription = this.clockService.getTimer().subscribe(
       (timer) => {
         this._clockDate = new Date();
         console.log('timer invoked: ' + this._clockDate)
@@ -55,6 +61,7 @@ export class ClockComponent implements OnInit, OnDestroy {
 
   // always unsubscribe on component exit
   ngOnDestroy() {
-    this._subscription.unsubscribe();
+    this._clockServiceSubscription.unsubscribe();
+    this._clockColorStoreSubscription.unsubscribe();
   }
 }

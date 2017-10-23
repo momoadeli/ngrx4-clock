@@ -9,7 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/container/page-not-found
 import { ClockService } from './clock/clock.service';
 import { ClockWidgetComponent } from './clock/widget-components/clock-widget/clock-widget.component';
 import { StoreModule } from '@ngrx/store';
-import * as clockColorReducers from './clock/state-management/reducers/clock-color';
+import * as fromClockColor from './clock/state-management/reducers/clock-color';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import * as clockColorReducers from './clock/state-management/reducers/clock-col
     RouterModule.forRoot(
       appRoutes
     ),
-    StoreModule.forRoot({ clock_color: clockColorReducers.clockColorReducer })
+    StoreModule.forRoot({ clock_color: fromClockColor.clockColorReducer })
   ],
   providers: [
     ClockService,
