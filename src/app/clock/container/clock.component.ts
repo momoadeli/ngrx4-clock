@@ -30,15 +30,16 @@ export class ClockComponent implements OnInit, OnDestroy {
     this._clock_color$ = store.select('clock_color');
     this._clock_color$.subscribe( (clock_color) => {
       console.log('in store subscribe' + clock_color);
+      this._clock_color = clock_color;
     });
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this._clock_color = params['clock-color'];
+      // this._clock_color = params['clock-color'];
 
       // In a real app: dispatch action to load the details here:
-      this.store.dispatch({ type: this._clock_color });
+      this.store.dispatch({ type: params['clock-color'] });
     });
 
     this._subscription = this.clockService.getTimer().subscribe(
