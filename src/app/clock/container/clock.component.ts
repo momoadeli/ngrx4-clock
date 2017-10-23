@@ -1,7 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import { ClockService } from '../clock.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Store } from '@ngrx/store';
+import * as clockColorReducers from '../state-management/reducers/clock-color';
+
+interface AppState {
+  clock_color: string;
+}
 
 @Component({
   selector: 'app-clock',
@@ -10,23 +17,31 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ClockComponent implements OnInit, OnDestroy {
 
-  private _clock_color = 'Red';
+  private _clock_color;
+  private _clock_color$: Observable<string>;
   private _subscription: Subscription;
   private _clockDate: Date;
 
   constructor(
     private route: ActivatedRoute,
-    private clockService: ClockService
-  ) { }
+    private clockService: ClockService,
+    private store: Store<AppState>
+  ) {
+    this._clock_color$ = store.select('clock_color');
+    this._clock_color$.subscribe( (clock_color) => {
+      console.log('in store subscribe' + clock_color);
+    });
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this._clock_color = params['clock-color'];
 
-      // In a real app: dispatch action to load the details here.
+      // In a real app: dispatch action to load the details here:
+      this.store.dispatch({ type: this._clock_color });
     });
 
-    this._subscription = this.clockService.getTimer().subscribe( 
+    this._subscription = this.clockService.getTimer().subscribe(
       (timer) => {
         this._clockDate = new Date();
         console.log('timer invoked: ' + this._clockDate)
