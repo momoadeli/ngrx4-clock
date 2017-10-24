@@ -6,9 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import * as fromClockColor from '../state-management/reducers/clock-color';
 import * as clockColorActions from '../state-management/actions/clock-color';
-interface AppState {
-  clock_color: string;
-}
+import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'app-clock',
@@ -26,9 +24,11 @@ export class ClockComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private clockService: ClockService,
-    private store: Store<AppState>
+    private store: Store<fromRoot.State>
   ) {
-    this._clock_color$ = store.select('clock_color');
+    const fr = fromRoot;
+    const frCC = fromRoot.getClockColor;
+    this._clock_color$ = store.select(fromRoot.getClockColor);
     this._clockColorStoreSubscription =
       this._clock_color$.subscribe( (clock_color) => {
         console.log('in store subscribe' + clock_color);
@@ -38,20 +38,12 @@ export class ClockComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      // this._clock_color = params['clock-color'];
-
-      // In a real app: dispatch action to load the details here:
-      // if (params['clock-color']) {
-      //   this.store.dispatch({ type: params['clock-color'] });
-      // } else {
-      //   this.store.dispatch({ type: '' });
-      // }
       if (params['clock-color'] === 'blue') {
         this.store.dispatch(new clockColorActions.SetBlue());
       } else if (params['clock-color'] === 'red') {
         this.store.dispatch(new clockColorActions.SetRed());
       } else {
-        this.store.dispatch(new clockColorActions.SetRed());
+        // do something else...up to you
       }
     });
 
@@ -69,6 +61,6 @@ export class ClockComponent implements OnInit, OnDestroy {
   // always unsubscribe on component exit
   ngOnDestroy() {
     this._clockServiceSubscription.unsubscribe();
-    this._clockColorStoreSubscription.unsubscribe();
+    // this._clockColorStoreSubscription.unsubscribe();
   }
 }

@@ -2,21 +2,30 @@
 import * as clockColorActions from '../actions/clock-color';
 
 export interface State {
-    clock_color: string;
+    clockColor: string;
 }
 
 const initialState: State = {
-    clock_color: '',
+    clockColor: 'mo',
 };
 
 export function clockColorReducer(state: State = initialState,
                                 action: clockColorActions.Actions): State {
     switch (action.type) {
         case clockColorActions.SET_RED:
-            return { clock_color: 'red' };
+            return { clockColor: 'red' };
         case clockColorActions.SET_BLUE:
-            return { clock_color: 'blue' };
+            return { clockColor: 'blue' };
         default:
             return state;
     }
 }
+
+export const getClockColor = (state: State) => {
+//     if (state) {
+        return state.clockColor;
+//     } else {
+//         // return 'red';
+//     }
+};
+// export const getClockColor = (state: State) => state.clock_color;

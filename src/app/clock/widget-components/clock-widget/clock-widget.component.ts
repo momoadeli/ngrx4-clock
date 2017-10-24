@@ -15,6 +15,8 @@ export class ClockWidgetComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    console.log('updated inputs: ' + this.clockColor);
+    if (changes.clockColor) {
+      console.log('updated inputs: ' + this.clockColor);
+    }
   }
 }
