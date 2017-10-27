@@ -60,7 +60,8 @@ export class ClockComponent implements OnInit, OnDestroy {
 
   // always unsubscribe on component exit
   ngOnDestroy() {
+    console.log('unsubscribe from observables');
     this._clockServiceSubscription.unsubscribe();
-    // this._clockColorStoreSubscription.unsubscribe();
+    this._clockColorStoreSubscription.unsubscribe();
   }
 }
