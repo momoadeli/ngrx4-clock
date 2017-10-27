@@ -26,14 +26,14 @@ export class ClockComponent implements OnInit, OnDestroy {
     private clockService: ClockService,
     private store: Store<fromRoot.State>
   ) {
-    const fr = fromRoot;
-    const frCC = fromRoot.getClockColor;
-    this._clock_color$ = store.select(fromRoot.getClockColor);
-    this._clockColorStoreSubscription =
-      this._clock_color$.subscribe( (clock_color) => {
-        console.log('in store subscribe' + clock_color);
-        this._clock_color = clock_color;
-      });
+    // const fr = fromRoot;
+    // const frCC = fromRoot.getClockColor;
+    // this._clock_color$ = store.select(fromRoot.getClockColor);
+    // this._clockColorStoreSubscription =
+    //   this._clock_color$.subscribe( (clock_color) => {
+    //     console.log('in store subscribe' + clock_color);
+    //     this._clock_color = clock_color;
+    //   });
   }
 
   ngOnInit() {
@@ -46,6 +46,15 @@ export class ClockComponent implements OnInit, OnDestroy {
         // do something else...up to you
       }
     });
+
+    const fr = fromRoot;
+    const frCC = fromRoot.getClockColor;
+    this._clock_color$ = this.store.select(fromRoot.getClockColor);
+    this._clockColorStoreSubscription =
+      this._clock_color$.subscribe( (clock_color) => {
+        console.log('in store subscribe' + clock_color);
+        this._clock_color = clock_color;
+      });  
 
     this._clockServiceSubscription = this.clockService.getTimer().subscribe(
       (timer) => {
