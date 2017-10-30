@@ -9,7 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/container/page-not-found
 import { ClockService } from './clock/clock.service';
 import { ClockWidgetComponent } from './clock/widget-components/clock-widget/clock-widget.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './reducers';
+import { reducers } from './reducers'; // from index.js!
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
