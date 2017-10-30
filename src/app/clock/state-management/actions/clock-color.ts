@@ -12,3 +12,4 @@ export class SetBlue implements Action {
 }
 
 export type Actions = SetRed | SetBlue;
+

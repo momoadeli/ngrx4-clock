@@ -5,6 +5,7 @@ import { ActionReducerMap,
 
 import * as fromClockColor from '../clock/state-management/reducers/clock-color';
 
+// aggregation of all store states
 export interface State {
   clockColor: fromClockColor.State;
 }
