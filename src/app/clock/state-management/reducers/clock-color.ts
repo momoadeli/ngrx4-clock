@@ -6,7 +6,7 @@ export interface State {
 }
 
 const initialState: State = {
-    clockColor: 'mo',
+    clockColor: '',
 };
 
 export function clockColorReducer(state: State = initialState,

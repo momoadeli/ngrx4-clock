@@ -15,7 +15,7 @@ import * as fromRoot from '../../reducers';
 })
 export class ClockComponent implements OnInit, OnDestroy {
 
-  private _clock_color;
+  private _clock_color: string;
   private _clock_color$: Observable<string>;
   private _clockServiceSubscription: Subscription;
   private _clockColorStoreSubscription: Subscription;

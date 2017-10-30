@@ -10,6 +10,8 @@ import { ClockService } from './clock/clock.service';
 import { ClockWidgetComponent } from './clock/widget-components/clock-widget/clock-widget.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,10 @@ import { reducers } from './reducers';
     RouterModule.forRoot(
       appRoutes
     ),
-    StoreModule.forRoot( reducers )
+    StoreModule.forRoot( reducers ),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25 //  Retains last 25 states
+    })
   ],
   providers: [
     ClockService,
