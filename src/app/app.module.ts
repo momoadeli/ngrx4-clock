@@ -11,13 +11,15 @@ import { ClockWidgetComponent } from './clock/widget-components/clock-widget/clo
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './reducers'; // from index.js!
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { PageNotFoundWidgetComponent } from './page-not-found/widget-components/page-not-found-widget/page-not-found-widget.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClockComponent,
     PageNotFoundComponent,
-    ClockWidgetComponent
+    ClockWidgetComponent,
+    PageNotFoundWidgetComponent
   ],
   imports: [
     BrowserModule,

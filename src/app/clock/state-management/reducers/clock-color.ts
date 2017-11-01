@@ -22,10 +22,6 @@ export function clockColorReducer(state: State = initialState,
 }
 
 export const getClockColor = (state: State) => {
-//     if (state) {
-        return state.clockColor;
-//     } else {
-//         // return 'red';
-//     }
+    return state.clockColor;
 };
 // export const getClockColor = (state: State) => state.clock_color;
