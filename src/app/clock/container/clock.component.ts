@@ -40,6 +40,7 @@ export class ClockComponent implements OnInit, OnDestroy {
     });
 
     this._clock_color$ = this.store.select(fromRoot.getClockColor);
+    // don't need to subscribe if using asyn pipe in html:
     this._clockColorStoreSubscription =
       this._clock_color$.subscribe( (clock_color) => {
         console.log('in store subscribe' + clock_color);
