@@ -1,7 +1,6 @@
 # MyNgrxClock 2017
 **(Mo Moadeli: Fullstack Developer and Architect)**
 
-mm
 This project is generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.8.
 
 * Prerequisites (also in youtube comments):
