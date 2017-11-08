@@ -17,8 +17,10 @@ export class ClockComponent implements OnInit, OnDestroy {
 
   private _clock_color: string;
   private _clock_color$: Observable<string>;
+  private _clock_date$: Observable<Date>;
   private _clockServiceSubscription: Subscription;
-  private _clockColorStoreSubscription: Subscription;
+  private _clockColorSubscription: Subscription;
+  private _clockDateSubscription: Subscription;  
   private _clockDate: Date;
 
   constructor(
@@ -41,27 +43,34 @@ export class ClockComponent implements OnInit, OnDestroy {
 
     this._clock_color$ = this.store.select(fromRoot.getClockColor);
     // don't need to subscribe if using asyn pipe in html:
-    this._clockColorStoreSubscription =
+    this._clockColorSubscription =
       this._clock_color$.subscribe( (clock_color) => {
         console.log('in store subscribe' + clock_color);
         this._clock_color = clock_color;
       });
 
-    this._clockServiceSubscription = this.clockService.getTicker().subscribe(
-      (ticker) => {
-        this._clockDate = new Date();
-        console.log('ticker invoked: ' + this._clockDate);
-      }, (error) => {
-        console.log('ticker error');
-      }, () => {
-        console.log('ticker is never done');
+      this._clock_date$ = this.store.select(fromRoot.getClockDate);
+      this._clockDateSubscription =
+      this._clock_date$.subscribe( (clock_date) => {
+        console.log('in store subscribe' + clock_date);
+        this._clockDate = clock_date;
       });
+    // this._clockServiceSubscription = this.clockService.getTicker().subscribe(
+    //   (ticker) => {
+    //     this._clockDate = new Date();
+    //     console.log('ticker invoked: ' + this._clockDate);
+    //   }, (error) => {
+    //     console.log('ticker error');
+    //   }, () => {
+    //     console.log('ticker is never done');
+    //   });
   }
 
   // always unsubscribe on component exit
   ngOnDestroy() {
     console.log('unsubscribe from observables');
     this._clockServiceSubscription.unsubscribe();
-    this._clockColorStoreSubscription.unsubscribe();
+    this._clockColorSubscription.unsubscribe();
+    this._clockDateSubscription.unsubscribe();
   }
 }
