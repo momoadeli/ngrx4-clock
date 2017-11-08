@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import { Observable } from 'rxjs/Observable';
+// import 'rxjs/add/operator/map'
 
 @Injectable()
 export class ClockService {
@@ -17,7 +18,7 @@ export class ClockService {
     // });
   }
 
-  getTimer(): Observable<number> {
+  getTicker(): Observable<number> {
     return this._timer;
   }
 }

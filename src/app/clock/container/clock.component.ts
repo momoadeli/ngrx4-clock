@@ -47,14 +47,14 @@ export class ClockComponent implements OnInit, OnDestroy {
         this._clock_color = clock_color;
       });
 
-    this._clockServiceSubscription = this.clockService.getTimer().subscribe(
-      (timer) => {
+    this._clockServiceSubscription = this.clockService.getTicker().subscribe(
+      (ticker) => {
         this._clockDate = new Date();
-        console.log('timer invoked: ' + this._clockDate);
+        console.log('ticker invoked: ' + this._clockDate);
       }, (error) => {
-        console.log('timer error');
+        console.log('ticker error');
       }, () => {
-        console.log('timer is never done');
+        console.log('ticker is never done');
       });
   }
 
