@@ -11,7 +11,7 @@ This project is generated with [Angular CLI](https://github.com/angular/angular-
     * Understand the notions of Smart vs presentational dumb) components
 
 * Over the course of a few videos we'll gradually build an ngrx 4 store for a 'clock'.
-    * The Store will contain a UI element (**'clock-color'**) and a date/time model (**'clock-datetime'**)
+    * The Store will contain a UI element/slice (**'clock-color'**) and a date/time element/slice (**'clock-datetime'**)
     * (Note, you can skip the first 2 videos if u’d like and go straight to the 3d video where we convert the clock service to a clock store. However, the first videos include interesting notions of routes, smart vs dum compoenents, and RxJs/Observables as we build up the clock.
 
 * But What Is an ngrx Store? 
