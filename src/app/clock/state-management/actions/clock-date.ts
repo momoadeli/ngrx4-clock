@@ -8,7 +8,7 @@ export const CLOCK_TICK_ERROR = '[CLOCK DATE] clock tick';
 export class GetClockTicker implements Action {
   readonly type = GET_CLOCK_TICKER;
 
-  constructor(public payload: Observable<number>) {}
+  // constructor(public payload: Observable<number>) {}
 }
 
 export class ClockTick implements Action {

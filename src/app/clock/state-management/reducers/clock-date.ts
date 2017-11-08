@@ -12,10 +12,10 @@ const initialState: State = {
 export function clockDateReducer(state: State = initialState,
                                 action: clockDateActions.Actions): State {
     switch (action.type) {
-        // case clockDateActions.SET_RED:
-        //     return { clockDate: 'red' };
         case clockDateActions.CLOCK_TICK:
             return { clockDate: new Date() };
+        case clockDateActions.GET_CLOCK_TICKER:
+            return state;
         default:
             return state;
     }

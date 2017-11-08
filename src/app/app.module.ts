@@ -12,6 +12,8 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from './reducers'; // from index.js!
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PageNotFoundWidgetComponent } from './page-not-found/widget-components/page-not-found-widget/page-not-found-widget.component';
+import { EffectsModule } from '@ngrx/effects';
+import { ClockEffects } from './clock/state-management/effects/clock-date';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { PageNotFoundWidgetComponent } from './page-not-found/widget-components/
       appRoutes
     ),
     StoreModule.forRoot( reducers ),
+    EffectsModule.forRoot([ClockEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25 //  Retains last 25 states
     })

@@ -12,13 +12,13 @@ import { ClockService } from '../../clock.service';
 import * as clockDateActions from '../actions/clock-date';
 
 @Injectable()
-export class AuthEffects {
+export class ClockEffects {
   @Effect()
   login$ = this.actions$
     .ofType(clockDateActions.GET_CLOCK_TICKER)
-    .map((action: clockDateActions.GetClockTicker) => {
-        return action.payload;
-    })
+    // .map((action: clockDateActions.GetClockTicker) => {
+    //     return null;
+    // })
     .exhaustMap(ticker =>
       this.clockService
         .getTicker()    // get reference to ticker Observable<number>

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import * as fromClockColor from '../state-management/reducers/clock-color';
 import * as clockColorActions from '../state-management/actions/clock-color';
+import * as clockDateActions from '../state-management/actions/clock-date';
 import * as fromRoot from '../../reducers';
 
 @Component({
@@ -28,6 +29,7 @@ export class ClockComponent implements OnInit, OnDestroy {
     private clockService: ClockService,
     private store: Store<fromRoot.State>
   ) {
+    this.store.dispatch(new clockDateActions.GetClockTicker());
   }
 
   ngOnInit() {
@@ -69,7 +71,7 @@ export class ClockComponent implements OnInit, OnDestroy {
   // always unsubscribe on component exit
   ngOnDestroy() {
     console.log('unsubscribe from observables');
-    this._clockServiceSubscription.unsubscribe();
+    // this._clockServiceSubscription.unsubscribe();
     this._clockColorSubscription.unsubscribe();
     this._clockDateSubscription.unsubscribe();
   }
