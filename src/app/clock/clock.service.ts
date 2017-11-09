@@ -5,20 +5,17 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ClockService {
-  private _timer: Observable<number>;
+  private _ticker: Observable<number>;
 
   constructor() {
-    this.startTimer();
+    this.startTicker();
   }
 
-  startTimer(): void {
-    this._timer = TimerObservable.create(1000, 1000);
-    // this._subscription = timer.subscribe( (t) => {
-    //   this._tick = t;
-    // });
+  startTicker(): void {
+    this._ticker = TimerObservable.create(1000, 1000);
   }
 
   getTicker(): Observable<number> {
-    return this._timer;
+    return this._ticker;
   }
 }
