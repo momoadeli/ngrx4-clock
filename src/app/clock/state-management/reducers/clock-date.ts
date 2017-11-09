@@ -24,4 +24,3 @@ export function clockDateReducer(state: State = initialState,
 export const getClockDate = (state: State) => {
     return state.clockDate;
 };
-// export const getClockDate = (state: State) => state.clock_color;
